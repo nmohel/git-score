@@ -7,11 +7,15 @@ import { UserService } from '../user.service';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  username: string;
+  username: string = '';
+  error: string;
 
   constructor(private _userService: UserService) { }
 
   ngOnInit() {
+    this._userService.userError.subscribe((value) => {
+      this.error = value;
+    });
   }
 
   sendUsername() {

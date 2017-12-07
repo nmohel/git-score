@@ -1,9 +1,10 @@
 <form #userForm="ngForm">
   <div>
     <label for="git_name">GitHub Username:</label>
-    <input type="text" name="git_name" id="git_name" [(ngModel)]="username">
+    <input type="text" name="git_name" id="git_name" [(ngModel)]="username" required>
+    <div class="error" *ngIf="error.length > 0">There was a problem getting that username: {{error}}</div>
   </div>
   <div>
-    <button class="big" (click)="sendUsername()">Calculate my GitHub Score</button>
+    <button [disabled]="!userForm.valid" (click)="sendUsername()">Calculate my GitHub Score</button>
   </div>
 </form>

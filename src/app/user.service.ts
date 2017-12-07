@@ -6,18 +6,29 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   user: BehaviorSubject<object> = new BehaviorSubject({});
+  userError: BehaviorSubject<any> = new BehaviorSubject('');
 
   constructor(private _http: HttpClient) {
-    console.log(this.user);
   }
 
   requestUser(username) {
     let url = `https://api.github.com/users/${username}`;
-    this._http.get(url).subscribe(
-      (response: object) => {
+    // this._http.get(url).subscribe(
+    //   (response: object) => {
+    //     this.user.next(response);
+    //     console.log(response); // TODO: remove later
+    //     console.log(this.user); // TODO: remove later
+    //   }
+    // );
+    this._http.get(url).toPromise().then(
+      (response) => {
         this.user.next(response);
-        console.log(response); // TODO: remove later
-        console.log(this.user); // TODO: remove later
+        this.userError.next('');
+      }
+    ).catch(
+      (reason) => {
+        this.user.next({});
+        this.userError.next(reason.error.message);
       }
     );
   }
