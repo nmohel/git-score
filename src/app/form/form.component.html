@@ -1,0 +1,9 @@
+<form #userForm="ngForm">
+  <div>
+    <label for="git_name">GitHub Username:</label>
+    <input type="text" name="git_name" id="git_name" [(ngModel)]="username">
+  </div>
+  <div>
+    <button class="big" (click)="sendUsername()">Calculate my GitHub Score</button>
+  </div>
+</form>

@@ -1,0 +1,6 @@
+<div class="my-score">
+  <h2>Your Score: {{score}} </h2>
+  <p [ngClass]="{'red': score < 20, 'orange': score < 50 && score >= 20, 'black': score < 100 && score >= 50, 'green': score < 200 && score >= 100, 'blue': score >= 200}">
+    {{message}}
+  </p>
+</div>
